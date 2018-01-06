@@ -64,11 +64,17 @@ namespace Bug_Tracking_Application
         private void btnView_Click(object sender, EventArgs e)
         {
             connection.Open(); // Open connection to Data Source
-            String query = "SELECT * FROM Bug "; // Select all from Bug table
+            String query = "SELECT Tester_ID,Tester_Name,Application_Name,Class_Name,Line_No,Error_Description,Source_Code,Status FROM Bug "; // Select all from Bug table
             SqlDataAdapter adapter = new SqlDataAdapter(query, connection); // Create Data Adapter, use Query and Connection
             DataTable table = new DataTable();
             adapter.Fill(table);
             dataGridView1.DataSource = table;
+
+            txtCode.Multiline = true;
+            txtCode.SelectionStart = txtCode.Text.Length;
+            txtCode.ScrollToCaret();
+            txtCode.Text = dataGridView1.SelectedRows[0].Cells[7].Value.ToString();
+
             connection.Close(); // Close Connection after data is displayed
         }
         /// <summary>
@@ -90,7 +96,8 @@ namespace Bug_Tracking_Application
         /// </summary>
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            AboutBox2 a1 = new AboutBox2();
+            a1.ShowDialog();
         }
         /// <summary>
         /// Update record in Bug table
@@ -118,6 +125,7 @@ namespace Bug_Tracking_Application
             txtClass.Text = dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
             txtLineNo.Text = dataGridView1.SelectedRows[0].Cells[4].Value.ToString();
             txtDesc.Text = dataGridView1.SelectedRows[0].Cells[5].Value.ToString();
+            txtCode.Text = dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
             txtSource.Text = dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
             txtStatus.Text = dataGridView1.SelectedRows[0].Cells[7].Value.ToString();
         }
