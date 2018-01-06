@@ -62,7 +62,8 @@ namespace Bug_Tracking_Application
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             connection.Open();
-            String query = "UPDATE Bug SET Tester_Name = '" + txtName.Text + "',Application_Name = '" + txtApp.Text + "',Class_Name = '" + txtClass.Text + "', Line_No = '" + txtLineNo.Text + "',Error_Description = '" + txtDesc.Text + "',Source_Code = '" + txtSource.Text + "',Status = '" + txtStatus.Text + "'";
+            SqlCommand command = new SqlCommand();
+            String query = "UPDATE Bug Set Tester_Name = '" + txtName.Text + "',Application_Name = '" + txtApp.Text + "',Class_Name = '" + txtClass.Text + "',Line_No = '" + txtLineNo.Text + "',Error_Description = '" + txtDesc.Text + "',Source_Code = '" + txtSource.Text + "',Status = '" + txtStatus.Text + "' WHERE Tester_ID = '" + txtID.Text +"'";
             SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
             adapter.SelectCommand.ExecuteNonQuery();
             connection.Close();
@@ -84,8 +85,8 @@ namespace Bug_Tracking_Application
         private void btnRemove_Click(object sender, EventArgs e)
         {
             connection.Open();
-            String query = "DELETE FROM Bug WHERE Tester_ID = '"+txtID+"";
-            SqlDataAdapter adapter = new SqlDataAdapter();
+            String query = "DELETE FROM Bug WHERE Tester_ID = '"+txtID.Text+"'";
+            SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
             adapter.SelectCommand.ExecuteNonQuery();
             connection.Close();
             MessageBox.Show("Record Successfully Deleted");
