@@ -135,5 +135,20 @@ namespace Bug_Tracking_Application
             connection.Close(); // Close connection once query is run
             MessageBox.Show("Record Successfully Deleted"); // Confirmation that record was deleted successfully
         }
+        /// <summary>
+        /// Menu item to exit application
+        /// </summary>
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+        /// <summary>
+        /// Menu item to open About box
+        /// </summary>
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox1 a = new AboutBox1();
+            a.ShowDialog();
+        }
     }
 }
