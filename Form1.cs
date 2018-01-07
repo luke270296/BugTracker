@@ -158,5 +158,17 @@ namespace Bug_Tracking_Application
             AboutBox1 a = new AboutBox1();
             a.ShowDialog();
         }
+        /// <summary>
+        /// Allows user to search for bugs based on their current status
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            connection.Open(); // Open connection to Data Source
+            String query = "SELECT Tester_ID,Tester_Name,Application_Name,Class_Name,Line_No,Error_Description,Source_Code,Status FROM Bug WHERE Status='"+txtSearch.Text+"'"; // Select all from Bug table where Status equals what has been entered
+            SqlDataAdapter adapter = new SqlDataAdapter(query, connection); // Create Data Adapter, use Query and Connection
+            DataTable table = new DataTable();
+            adapter.Fill(table);
+            dataGridView1.DataSource = table;
+            connection.Close();
+        }
     }
 }
