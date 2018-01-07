@@ -27,9 +27,9 @@ namespace Bug_Tracking_Application
             adapter.Fill(table);
             if (table.Rows.Count == 1)
             {
+                this.Hide();
                 Main Main = new Main();
                 Main.ShowDialog();
-                this.Close();
             }
 
             else
